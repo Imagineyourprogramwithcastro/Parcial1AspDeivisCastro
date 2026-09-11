@@ -9,7 +9,7 @@
                     <label for="txtEmail">Correo electronico:</label>
                     <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" TextMode="Email" placeholder="Ingrese su correo electronico"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtEmail" ErrorMessage="El campo es obligatorio" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
-                    <asp:RegularExpressionValidator runat="server" ControlToValidate="txtEmail" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ErrorMessage="Formato de correo inválido" ForeColor="Red" Display="Dynamic" />
+                    <asp:RegularExpressionValidator runat="server" ControlToValidate="txtEmail" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ErrorMessage="Formato de correo invalido" ForeColor="Red" Display="Dynamic" />
                 </div>
 
                 <div class="form-group mt-3">

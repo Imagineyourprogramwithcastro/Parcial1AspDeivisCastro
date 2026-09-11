@@ -22,7 +22,7 @@
                     <label for="txtCorreo">Correo electronico:</label>
                     <asp:TextBox ID="txtCorreo" runat="server" CssClass="form-control" TextMode="Email"></asp:TextBox>
                     <asp:RequiredFieldValidator runat="server" ControlToValidate="txtCorreo" ErrorMessage="El correo es obligatorio" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
-                    <asp:RegularExpressionValidator runat="server" ControlToValidate="txtCorreo" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ErrorMessage="Formato de correo inválido" ForeColor="Red" Display="Dynamic"></asp:RegularExpressionValidator>
+                    <asp:RegularExpressionValidator runat="server" ControlToValidate="txtCorreo" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ErrorMessage="Formato de correo invalido" ForeColor="Red" Display="Dynamic"></asp:RegularExpressionValidator>
                 </div>
 
                 <div class="form-group mt-3">
@@ -35,7 +35,7 @@
                     <label for="txtConfirmarContrasena">Confirmar contrasena:</label>
                     <asp:TextBox ID="txtConfirmarContrasena" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
                     <asp:RequiredFieldValidator runat="server" ControlToValidate="txtConfirmarContrasena" ErrorMessage="Confirma la contrasena" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
-                    <asp:CompareValidator runat="server" ControlToValidate="txtConfirmarContrasena" ControlToCompare="txtNuevaContrasena" ErrorMessage="Las contraseñas no coinciden" ForeColor="Red" Display="Dynamic"></asp:CompareValidator>
+                    <asp:CompareValidator runat="server" ControlToValidate="txtConfirmarContrasena" ControlToCompare="txtNuevaContrasena" ErrorMessage="Las contrasenas no coinciden" ForeColor="Red" Display="Dynamic"></asp:CompareValidator>
                 </div>
 
                 <asp:Label ID="lblMensaje" runat="server" Visible="false" CssClass="d-block mt-3" />

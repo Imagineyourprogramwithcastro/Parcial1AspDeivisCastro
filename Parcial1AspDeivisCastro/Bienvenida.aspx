@@ -24,7 +24,7 @@
                             <label>Correo electronico</label>
                             <asp:TextBox ID="txtCorreoCliente" runat="server" CssClass="form-control" TextMode="Email"></asp:TextBox>
                             <asp:RequiredFieldValidator runat="server" ControlToValidate="txtCorreoCliente" ValidationGroup="cliente" ErrorMessage="El correo es obligatorio" ForeColor="Red" Display="Dynamic" />
-                            <asp:RegularExpressionValidator runat="server" ControlToValidate="txtCorreoCliente" ValidationGroup="cliente" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ErrorMessage="Formato de correo inválido" ForeColor="Red" Display="Dynamic" />
+                            <asp:RegularExpressionValidator runat="server" ControlToValidate="txtCorreoCliente" ValidationGroup="cliente" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ErrorMessage="Formato de correo invalido" ForeColor="Red" Display="Dynamic" />
                         </div>
                         <div class="col-md-4 mb-3">
                             <label>Numero de factura</label>
@@ -36,7 +36,7 @@
                         <div class="col-md-4 mb-3">
                             <label>Direccion del cliente</label>
                             <asp:TextBox ID="txtDireccionCliente" runat="server" CssClass="form-control"></asp:TextBox>
-                            <asp:RequiredFieldValidator runat="server" ControlToValidate="txtDireccionCliente" ValidationGroup="cliente" ErrorMessage="La dirección es obligatoria" ForeColor="Red" Display="Dynamic" />
+                            <asp:RequiredFieldValidator runat="server" ControlToValidate="txtDireccionCliente" ValidationGroup="cliente" ErrorMessage="La direccion es obligatoria" ForeColor="Red" Display="Dynamic" />
                         </div>
                         <div class="col-md-4 mb-3">
                             <label>Fecha de factura</label>
@@ -54,8 +54,8 @@
                         <div class="col-md-4 mb-3">
                             <label>Codigo postal</label>
                             <asp:TextBox ID="txtCodigoPostal" runat="server" CssClass="form-control"></asp:TextBox>
-                            <asp:RequiredFieldValidator runat="server" ControlToValidate="txtCodigoPostal" ValidationGroup="cliente" ErrorMessage="El código postal es obligatorio" ForeColor="Red" Display="Dynamic" />
-                            <asp:RegularExpressionValidator runat="server" ControlToValidate="txtCodigoPostal" ValidationGroup="cliente" ValidationExpression="^[0-9]{4,6}$" ErrorMessage="Código postal inválido" ForeColor="Red" Display="Dynamic" />
+                            <asp:RequiredFieldValidator runat="server" ControlToValidate="txtCodigoPostal" ValidationGroup="cliente" ErrorMessage="El codigo postal es obligatorio" ForeColor="Red" Display="Dynamic" />
+                            <asp:RegularExpressionValidator runat="server" ControlToValidate="txtCodigoPostal" ValidationGroup="cliente" ValidationExpression="^[0-9]{4,6}$" ErrorMessage="Codigo postal invalido" ForeColor="Red" Display="Dynamic" />
                         </div>
                         <div class="col-md-4 mb-3">
                             <label>Pais</label>
@@ -64,9 +64,12 @@
                                 <asp:ListItem Text="Colombia" Value="Colombia"></asp:ListItem>
                                 <asp:ListItem Text="Mexico" Value="México"></asp:ListItem>
                                 <asp:ListItem Text="Ecuador" Value="Ecuador"></asp:ListItem>
+                                <asp:ListItem Text="Argentina" Value="Argentina"></asp:ListItem>
+                                <asp:ListItem Text="Estados Unidos" Value="Estados Unidos"></asp:ListItem>
+                                <asp:ListItem Text="Brasil" Value="Brasil"></asp:ListItem>
                                 <asp:ListItem Text="Peru" Value="Perú"></asp:ListItem>
                             </asp:DropDownList>
-                            <asp:RequiredFieldValidator runat="server" ControlToValidate="ddlPais" ValidationGroup="cliente" ErrorMessage="Debe seleccionar un país" ForeColor="Red" Display="Dynamic" />
+                            <asp:RequiredFieldValidator runat="server" ControlToValidate="ddlPais" ValidationGroup="cliente" ErrorMessage="Debe seleccionar un pais" ForeColor="Red" Display="Dynamic" />
                         </div>
                         <div class="col-md-4 mb-3">
                             <label>Provincia</label>
@@ -104,17 +107,17 @@
                                     <td><input type="text" name="itemNombre" class="form-control" /></td>
                                     <td><input type="text" name="itemDescripcion" class="form-control" /></td>
                                     <td><input type="text" name="itemPresentacion" class="form-control" /></td>
-                                    <td><input type="number" name="itemCantidad" class="form-control" min="1" step="1" /></td>
-                                    <td><input type="number" name="itemPrecio" class="form-control" min="0" step="0.01" /></td>
-                                    <td><input type="text" class="form-control" value="0.00" readonly /></td>
+                                    <td><input type="number" name="itemCantidad" class="form-control item-cantidad" min="1" step="1" oninput="actualizarTotalesFactura();" /></td>
+                                    <td><input type="number" name="itemPrecio" class="form-control item-precio" min="0" step="0.01" oninput="actualizarTotalesFactura();" /></td>
+                                    <td><input type="text" class="form-control item-total" value="0.00" readonly /></td>
                                 </tr>
                                 <tr>
                                     <td><input type="text" name="itemNombre" class="form-control" /></td>
                                     <td><input type="text" name="itemDescripcion" class="form-control" /></td>
                                     <td><input type="text" name="itemPresentacion" class="form-control" /></td>
-                                    <td><input type="number" name="itemCantidad" class="form-control" min="1" step="1" /></td>
-                                    <td><input type="number" name="itemPrecio" class="form-control" min="0" step="0.01" /></td>
-                                    <td><input type="text" class="form-control" value="0.00" readonly /></td>
+                                    <td><input type="number" name="itemCantidad" class="form-control item-cantidad" min="1" step="1" oninput="actualizarTotalesFactura();" /></td>
+                                    <td><input type="number" name="itemPrecio" class="form-control item-precio" min="0" step="0.01" oninput="actualizarTotalesFactura();" /></td>
+                                    <td><input type="text" class="form-control item-total" value="0.00" readonly /></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -122,7 +125,7 @@
 
                     <div class="mt-3">
                         <button type="button" class="btn btn-secondary" id="btnAgregarItem" onclick="agregarItemFactura(); return false;">Agregar articulo</button>
-                        <asp:Button ID="btnCalcularTotal" runat="server" Text="Calcular total" CssClass="btn btn-success" OnClick="btnCalcularTotal_Click" />
+                        <asp:Button ID="btnCalcularTotal" runat="server" Text="Confirmar total" CssClass="btn btn-success" OnClick="btnCalcularTotal_Click" />
                         <asp:Button ID="btnFinalizarFactura" runat="server" Text="Finalizar" CssClass="btn btn-primary ml-2" OnClick="btnFinalizarFactura_Click" />
                     </div>
 
@@ -142,10 +145,10 @@
             <div class="card border-light shadow-sm mt-4">
                 <div class="card-body">
                     <h4 class="text-center mb-3">Encuesta de satisfaccion</h4>
-                    <p class="text-center">Cuéntanos tu experiencia con nuestro sitio web</p>
+                    <p class="text-center">Cuentanos tu experiencia con nuestro sitio web</p>
 
                     <div class="mb-4">
-                        <p><strong>1. ¿Que tan satisfecho estás con la consulta o transaccion que acabas de realizar en nuestro sitio web?</strong></p>
+                        <p><strong>1. Que tan satisfecho estas con la consulta o transaccion que acabas de realizar en nuestro sitio web?</strong></p>
                         <asp:RadioButtonList ID="rblPregunta1" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow" CssClass="d-flex align-items-center justify-content-center">
                             <asp:ListItem Text="1" Value="1"></asp:ListItem>
                             <asp:ListItem Text="2" Value="2"></asp:ListItem>
@@ -157,7 +160,7 @@
                     </div>
 
                     <div class="mb-4">
-                        <p><strong>2. ¿Cuales son las principales razones por las que se sintio satisfecho o no satisfecho con la compra?</strong></p>
+                        <p><strong>2. Cuales son las principales razones por las que se sintio satisfecho o no satisfecho con la compra?</strong></p>
                         <asp:TextBox ID="txtComentarioEncuesta" runat="server" TextMode="MultiLine" Rows="4" CssClass="form-control"></asp:TextBox>
                     </div>
 
@@ -180,6 +183,40 @@
                 inputs[i].value = '';
             }
             tbody.appendChild(row);
+            actualizarTotalesFactura();
+        }
+
+        function actualizarTotalesFactura() {
+            var tabla = document.getElementById('tablaItems');
+            var filas = tabla.getElementsByTagName('tr');
+            var subtotal = 0;
+
+            for (var i = 0; i < filas.length; i++) {
+                var fila = filas[i];
+                var cantidadInput = fila.querySelector('.item-cantidad');
+                var precioInput = fila.querySelector('.item-precio');
+                var totalInput = fila.querySelector('.item-total');
+
+                if (!cantidadInput || !precioInput || !totalInput) continue;
+
+                var cantidad = parseFloat(cantidadInput.value) || 0;
+                var precio = parseFloat(precioInput.value) || 0;
+                var totalFila = cantidad * precio;
+
+                totalInput.value = totalFila.toFixed(2);
+                subtotal += totalFila;
+            }
+
+            var iva = subtotal * 0.19;
+            var totalGeneral = subtotal + iva;
+
+            var lblSubtotal = document.getElementById('<%= lblSubtotal.ClientID %>');
+            var lblIva = document.getElementById('<%= lblIva.ClientID %>');
+            var lblTotalPagar = document.getElementById('<%= lblTotalPagar.ClientID %>');
+
+            if (lblSubtotal) lblSubtotal.innerHTML = '$' + subtotal.toFixed(2);
+            if (lblIva) lblIva.innerHTML = '$' + iva.toFixed(2);
+            if (lblTotalPagar) lblTotalPagar.innerHTML = '$' + totalGeneral.toFixed(2);
         }
     </script>
 </asp:Content>
